@@ -4,37 +4,275 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Farmers Health Management System - Mark Emmanuel</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Base Styles */
+    :root {
+      --primary: #4CAF50;
+      --secondary: #8BC34A;
+      --accent: #FFC107;
+      --dark: #2E7D32;
+      --light: #F1F8E9;
+      --text: #333;
+      --text-light: #f8f9fa;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--light);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: var(--dark);
+      padding: 20px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover {
+      background-color: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+    }
+
+    /* Project Details */
+    .project-details {
+      padding: 80px 0;
+      background: linear-gradient(to bottom, #ffffff, var(--light));
+    }
+
+    .project-details h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--dark);
+      font-size: 2.5rem;
+      position: relative;
+    }
+
+    .project-details h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    .project-details img {
+      max-width: 800px;
+      margin: 30px auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 5px solid white;
+      transition: var(--transition);
+    }
+
+    .project-details img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .project-details p {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .project-details h3 {
+      text-align: center;
+      margin: 40px auto 20px;
+      color: var(--primary);
+      max-width: 800px;
+    }
+
+    .project-details ul {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      padding-left: 20px;
+    }
+
+    .project-details ul li {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+      font-size: 1.1rem;
+    }
+
+    .project-details ul li::before {
+      content: '\f058';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      top: 2px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      cursor: pointer;
+      background: var(--gradient);
+      color: white;
+      margin: 20px auto;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 60px;
+    }
+
+    footer p {
+      margin-bottom: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-details h1 {
+        font-size: 2rem;
+      }
+      
+      .project-details p, 
+      .project-details ul li {
+        font-size: 1rem;
+      }
+      
+      nav ul li {
+        margin: 5px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#portfolio">Portfolio</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
+    <div class="container">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="index.html#about"><i class="fas fa-user"></i> About</a></li>
+        <li><a href="index.html#portfolio"><i class="fas fa-briefcase"></i> Portfolio</a></li>
+        <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </div>
   </nav>
 
   <section class="project-details">
-    <h1>Farmers Health Management System</h1>
-    <img src="images/farmer.png" alt="Farmers Health Management System">
-    <p>
-      The Farmers Health Management System is a Flask-based application designed to help farmers access health information and 
-      consultations from online doctors. This project aims to improve the health and well-being of farmers by providing them 
-      with easy access to medical advice and resources.
-    </p>
-    <h3>Features:</h3>
-    <ul>
-      <li>Online consultations with doctors.</li>
-      <li>Health information and resources.</li>
-      <li>User-friendly interface for farmers.</li>
-    </ul>
-    <a href="index.html#portfolio" class="btn">Back to Portfolio</a>
+    <div class="container">
+      <h1>Farmers Health Management System</h1>
+      
+      <img src="images/farmer.png" alt="Farmers Health Management System">
+      
+      <p>
+        The Farmers Health Management System is a Flask-based application designed to help farmers access health information and 
+        consultations from online doctors. This project aims to improve the health and well-being of farmers by providing them 
+        with easy access to medical advice and resources.
+      </p>
+      
+      <h3>Key Features:</h3>
+      <ul>
+        <li>Secure user authentication system for farmers and doctors</li>
+        <li>Real-time online consultations with medical professionals</li>
+        <li>Comprehensive health information resources and articles</li>
+        <li>Appointment scheduling and management system</li>
+        <li>Health record tracking for individual farmers</li>
+        <li>Mobile-responsive design for accessibility in rural areas</li>
+      </ul>
+      
+      <h3>Technologies Used:</h3>
+      <ul>
+        <li>Python Flask for backend development</li>
+        <li>SQLAlchemy for database management</li>
+        <li>HTML5, CSS3, and JavaScript for frontend</li>
+        <li>Bootstrap for responsive design</li>
+        <li>WebRTC for video consultations</li>
+      </ul>
+      
+      <a href="index.html#portfolio" class="btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    </div>
   </section>
 
   <footer>
-    <p>&copy; 2023 Mark Emmanuel. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2023 Mark Emmanuel. All rights reserved.</p>
+    </div>
   </footer>
 </body>
 </html>

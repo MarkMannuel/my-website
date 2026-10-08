@@ -4,36 +4,455 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Voting System - Mark Emmanuel</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #1a237e;
+      --secondary-color: #3949ab;
+      --accent-color: #ff7043;
+      --light-color: #f5f5f5;
+      --dark-color: #0d0d0d;
+      --text-color: #333;
+      --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.7;
+      color: var(--text-color);
+      background-color: var(--light-color);
+      overflow-x: hidden;
+    }
+    
+    nav {
+      background: var(--gradient);
+      padding: 1.2rem 5%;
+      box-shadow: 0 5px 20px rgba(26, 35, 126, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    
+    nav ul {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 2.5rem;
+    }
+    
+    nav ul li a {
+      color: var(--light-color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    
+    nav ul li a i {
+      margin-right: 8px;
+    }
+    
+    nav ul li a:hover {
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--accent-color);
+      transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    
+    .project-details {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 5%;
+      position: relative;
+    }
+    
+    .project-details::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(57, 73, 171, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+      z-index: -1;
+    }
+    
+    .project-details::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 112, 67, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+      z-index: -1;
+    }
+    
+    .project-details h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      padding-bottom: 1.5rem;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .project-details h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 5px;
+      background: var(--gradient);
+      border-radius: 5px;
+    }
+    
+    .project-image-container {
+      position: relative;
+      margin: 3rem 0;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+    
+    .project-image-container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+    
+    .project-details img {
+      width: 100%;
+      max-height: 600px;
+      object-fit: contain;
+      display: block;
+      background: white;
+      padding: 20px;
+    }
+    
+    .project-details p {
+      font-size: 1.15rem;
+      margin-bottom: 2.5rem;
+      color: var(--text-color);
+      line-height: 1.8;
+      padding: 0 2rem;
+      position: relative;
+      text-align: center;
+    }
+    
+    .project-details p::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: var(--gradient);
+      border-radius: 3px;
+    }
+    
+    .project-details h3 {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin: 2.5rem 0 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .project-details h3::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: var(--accent-color);
+      border-radius: 2px;
+    }
+    
+    .project-details ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0 3rem;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .project-details ul li {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border-left: 4px solid var(--accent-color);
+    }
+    
+    .project-details ul li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-details ul li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      color: rgba(57, 73, 171, 0.1);
+      font-size: 3rem;
+      z-index: 0;
+    }
+    
+    .btn-container {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gradient);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: none;
+      box-shadow: 0 10px 20px rgba(26, 35, 126, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn i {
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+    }
+    
+    .btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(26, 35, 126, 0.3);
+    }
+    
+    .btn:hover i {
+      transform: translateX(5px);
+    }
+    
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .btn:hover::after {
+      opacity: 1;
+    }
+    
+    footer {
+      background: var(--gradient);
+      color: var(--light-color);
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 5rem;
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(to right, var(--accent-color), var(--secondary-color));
+    }
+    
+    footer p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-links a {
+      color: var(--light-color);
+      font-size: 1.5rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-5px) scale(1.2);
+      color: var(--accent-color);
+    }
+    
+    /* Security badge element */
+    .security-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-color);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 5px 15px rgba(255, 112, 67, 0.3);
+      z-index: 2;
+    }
+    
+    @media (max-width: 992px) {
+      .project-details h1 {
+        font-size: 2.5rem;
+      }
+      
+      .project-details p {
+        padding: 0 1rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      nav ul li {
+        margin: 0.5rem 1rem;
+      }
+      
+      .project-details h1 {
+        font-size: 2.2rem;
+      }
+      
+      .project-details p {
+        font-size: 1rem;
+        padding: 0;
+      }
+      
+      .project-details p::before {
+        display: none;
+      }
+      
+      .project-details ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#portfolio">Portfolio</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="index.html#about"><i class="fas fa-user"></i> About</a></li>
+      <li><a href="index.html#portfolio"><i class="fas fa-briefcase"></i> Portfolio</a></li>
+      <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
     </ul>
   </nav>
 
   <section class="project-details">
     <h1>Online Voting System</h1>
-    <img src="images/home.png" alt="Online Voting System">
+    <div class="project-image-container">
+      <div class="security-badge">
+        <i class="fas fa-shield-alt"></i> Secure Platform
+      </div>
+      <img src="images/home.png" alt="Online Voting System Interface">
+    </div>
     <p>
-      The Online Voting System is a secure and efficient platform designed to enable voters to register and cast their votes online. 
-      This system ensures transparency and accessibility, making it easier for people to participate in elections from anywhere.
+      The Online Voting System revolutionizes democratic participation with a secure, accessible platform for digital elections. 
+      Built with end-to-end encryption and blockchain verification, our system ensures tamper-proof voting while maintaining 
+      complete voter anonymity. Designed for organizations, institutions, and government bodies, this solution combines 
+      cutting-edge security with exceptional user experience.
     </p>
-    <h3>Features:</h3>
+    <h3>Core Features</h3>
     <ul>
-      <li>Voter registration and authentication.</li>
-      <li>Secure voting process with encryption.</li>
-      <li>Real-time results and analytics.</li>
+      <li>
+        <strong>Military-Grade Security</strong><br>
+        AES-256 encryption, blockchain verification, and multi-factor authentication protect every vote
+      </li>
+      <li>
+        <strong>Accessible Voting</strong><br>
+        Responsive design with accessibility features for voters with disabilities
+      </li>
+      <li>
+        <strong>Real-Time Analytics</strong><br>
+        Live dashboards with demographic breakdowns and participation metrics
+      </li>
+      <li>
+        <strong>Comprehensive Admin Tools</strong><br>
+        Full election management with audit trails and result certification
+      </li>
+      <li>
+        <strong>Biometric Verification</strong><br>
+        Optional facial recognition and fingerprint authentication for enhanced security
+      </li>
     </ul>
-    <a href="index.html#portfolio" class="btn">Back to Portfolio</a>
+    <div class="btn-container">
+      <a href="index.html#portfolio" class="btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    </div>
   </section>
 
   <footer>
     <p>&copy; 2023 Mark Emmanuel. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
   </footer>
 </body>
 </html>

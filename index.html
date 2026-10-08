@@ -1,135 +1,454 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mark Emmanuel - Personal Website</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="description" content="Mark Emmanuel Ouma — First Class Honours Computer Science graduate focused on data analysis, networking, and cloud infrastructure.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mark Emmanuel Ouma — Systems &amp; Software Developer">
+  <meta property="og:description" content="First Class Honours Computer Science graduate focused on data analysis, networking, cloud infrastructure, and practical software projects.">
+  <meta property="og:image" content="images/profile-pictures/1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Mark Emmanuel Ouma — Systems &amp; Software Developer</title>
+  <link rel="icon" type="image/jpeg" href="images/profile-pictures/1.jpg">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1120;
+      --surface: #111a2c;
+      --surface-raised: #152137;
+      --line: rgba(167, 188, 220, .14);
+      --text: #edf3ff;
+      --muted: #9aa9c1;
+      --accent: #a78bfa;
+      --accent-strong: #6366f1;
+      --blue: #818cf8;
+      --radius: 18px;
+      --max-width: 1120px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at 15% 0%, rgba(68, 105, 184, .14), transparent 38rem), radial-gradient(ellipse at 92% 28%, rgba(139, 92, 246, .12), transparent 34rem), var(--bg);
+      color: var(--text);
+      font: 16px/1.7 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(var(--max-width), calc(100% - 48px)); margin-inline: auto; }
+    .skip-link { position: absolute; top: -60px; left: 16px; z-index: 2000; padding: 10px 14px; border-radius: 8px; background: var(--accent); color: #07121c; }
+    .skip-link:focus { top: 12px; }
+    .site-header { position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--line); background: rgba(11, 17, 32, .86); backdrop-filter: blur(18px); }
+    .scroll-progress { position: fixed; inset: 0 auto auto 0; z-index: 1100; width: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+    .nav-shell { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { color: var(--text); text-decoration: none; font-size: 1.02rem; font-weight: 750; letter-spacing: -.03em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 27px; margin: 0; padding: 0; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus-visible, .nav-links a[aria-current="location"] { color: var(--accent); }
+    .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--text); cursor: pointer; }
+    .hero { min-height: 600px; display: grid; grid-template-columns: 1.25fr .75fr; align-items: center; gap: 64px; padding-block: 85px 95px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); font-size: .78rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { width: 25px; height: 1px; background: currentColor; content: ""; }
+    h1 { max-width: 700px; margin: 18px 0 14px; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -.075em; }
+    h1 .highlight { color: var(--accent); }
+    .hero-title { margin: 0 0 18px; color: #c4d0e4; font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 500; }
+    .hero-copy { max-width: 620px; margin: 0; color: var(--muted); font-size: 1.04rem; }
+    .availability { display: inline-flex; align-items: center; gap: 8px; margin-top: 19px; color: #b7c8da; font-size: .8rem; }
+    .availability::before { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px rgba(167, 139, 250, .7); content: ""; }
+    .hero-actions, .about-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 19px; border: 1px solid transparent; border-radius: 999px; background: linear-gradient(135deg, var(--accent-strong), #a855f7); color: #fff; font-weight: 750; text-decoration: none; box-shadow: 0 8px 24px rgba(99, 102, 241, .22); transition: transform .2s, background .2s, border-color .2s; }
+    .button:hover { transform: translateY(-2px); background: linear-gradient(135deg, #5558e8, #9333ea); }
+    .button-secondary { border-color: rgba(167, 139, 250, .48); background: transparent; color: var(--text); box-shadow: none; }
+    .button-secondary:hover { border-color: var(--accent); background: var(--surface-raised); }
+    .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .social-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; color: #bac7da; font-size: .82rem; text-decoration: none; transition: border-color .2s, color .2s; }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); }
+    .portrait-column { display: grid; justify-items: center; gap: 15px; }
+    .hero-image-container { position: relative; width: min(100%, 340px); aspect-ratio: 1; justify-self: center; padding: 12px; border: 1px solid rgba(167, 139, 250, .42); border-radius: 34px; background: linear-gradient(145deg, rgba(99, 102, 241, .2), rgba(168, 85, 247, .1)); transform: rotate(3deg); }
+    .hero-image-container::before { position: absolute; z-index: -1; inset: 26px -20px -20px 26px; border: 1px solid rgba(131, 168, 255, .22); border-radius: 34px; content: ""; }
+    .hero-slider { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 25px; background: radial-gradient(circle at 50% 34%, #324b69, #17263c 58%, #111a2c); }
+    .hero-slider .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease-in-out; }
+    .hero-slider .slide.active { opacity: 1; }
+    .hero-slider .slide img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+    .hero-caption { margin: 0; padding: 7px 12px; border: 1px solid var(--line); border-radius: 12px; background: #111a2c; color: #d8e4f6; font-size: .78rem; }
+    .section { padding-block: 88px; border-top: 1px solid var(--line); }
+    .section-heading { margin-bottom: 36px; }
+    .section-kicker { color: var(--accent); font-size: .76rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+    .section-title { margin: 6px 0 0; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.15; letter-spacing: -.055em; }
+    .section-intro { max-width: 650px; margin: 12px 0 0; color: var(--muted); }
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: start; }
+    .about-copy { max-width: 680px; color: var(--muted); }
+    .about-copy p { margin: 0 0 16px; }
+    .about-stat { display: inline-flex; align-items: baseline; gap: 10px; margin-top: 9px; padding: 15px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .about-stat strong { color: var(--accent); font-size: 1.8rem; line-height: 1; }
+    .about-stat span { color: var(--muted); font-size: .8rem; }
+    .about-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 26px; }
+    .detail-item { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(17, 26, 44, .65); }
+    .detail-item strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+    .detail-item span, .detail-item a { color: #d0daea; font-size: .87rem; overflow-wrap: anywhere; }
+    .highlight-list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+    .highlight-list li { display: flex; gap: 12px; align-items: flex-start; color: #d0daea; }
+    .check { display: grid; flex: 0 0 23px; height: 23px; place-items: center; margin-top: 2px; border-radius: 7px; background: rgba(167, 139, 250, .14); color: var(--accent); font-size: .8rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 15px; }
+    .skill-card, .project-card, .timeline-card, .education-card, .contact-panel, .skills-panel { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(21, 33, 55, .88), rgba(15, 24, 41, .88)); }
+    .skill-card { padding: 23px; transition: transform .2s, border-color .2s; }
+    .skill-card:hover { transform: translateY(-4px); border-color: rgba(167, 139, 250, .4); }
+    .featured-skill { border-color: rgba(167, 139, 250, .48); background: linear-gradient(145deg, rgba(74, 58, 126, .45), rgba(15, 24, 41, .94)); }
+    .featured-skill .skill-icon { background: rgba(167, 139, 250, .22); }
+    .skill-icon { display: grid; width: 40px; height: 40px; place-items: center; margin-bottom: 18px; border: 1px solid rgba(167, 139, 250, .25); border-radius: 12px; background: rgba(99, 102, 241, .12); color: var(--accent); font-weight: 800; }
+    .skill-card h3, .skills-panel h3 { margin: 0 0 13px; font-size: 1rem; }
+    .skill-card ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .skill-card li { padding: 5px 9px; border: 1px solid var(--line); border-radius: 7px; color: var(--muted); font-size: .78rem; }
+    .skills-detail { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; margin-top: 20px; }
+    .skills-panel { padding: 24px; }
+    .skill-meter { display: grid; gap: 7px; margin-top: 13px; }
+    .skill-meter:first-of-type { margin-top: 0; }
+    .skill-meter-label { display: flex; justify-content: space-between; gap: 12px; color: #d0daea; font-size: .82rem; }
+    .skill-meter-label span:last-child { color: var(--accent); }
+    .meter-track { height: 8px; overflow: hidden; border-radius: 99px; background: #253149; }
+    .meter-fill { width: var(--level); height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent-strong), #a855f7); }
+    .meter-note { margin: 14px 0 0; color: var(--muted); font-size: .74rem; }
+    .professional-skills { display: flex; flex-wrap: wrap; gap: 9px; }
+    .professional-skills span { padding: 8px 11px; border: 1px solid rgba(167, 139, 250, .24); border-radius: 9px; background: rgba(99, 102, 241, .09); color: #d5cbff; font-size: .82rem; }
+    .project-filters { display: flex; flex-wrap: wrap; gap: 9px; margin: -8px 0 24px; }
+    .filter-button { padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font-size: .8rem; transition: color .2s, border-color .2s, background .2s; }
+    .filter-button:hover, .filter-button[aria-pressed="true"] { border-color: rgba(167, 139, 250, .55); background: rgba(99, 102, 241, .14); color: #e5ddff; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .project-card { overflow: hidden; transition: transform .22s, border-color .22s; }
+    .project-card:hover { transform: translateY(-5px); border-color: rgba(167, 139, 250, .48); }
+    .project-card[hidden] { display: none; }
+    .project-visual { position: relative; display: grid; height: 190px; place-items: center; overflow: hidden; border-bottom: 1px solid var(--line); background: #182944; }
+    .project-visual::before, .project-visual::after { position: absolute; width: 220px; height: 220px; border: 1px solid rgba(255, 255, 255, .13); border-radius: 50%; content: ""; }
+    .project-visual::after { width: 160px; height: 160px; }
+    .visual-family { background: radial-gradient(ellipse at 50% 120%, #53408c, #14283a 70%); }
+    .visual-math { background: radial-gradient(ellipse at 50% 120%, #6551a8, #17253e 70%); }
+    .visual-vote { background: radial-gradient(ellipse at 50% 120%, #2c65a4, #14263c 70%); }
+    .visual-fish { background: radial-gradient(ellipse at 50% 120%, #087f8c, #14263c 70%); }
+    .visual-farmer { background: radial-gradient(ellipse at 50% 120%, #4b8558, #14263c 70%); }
+    .visual-mark { position: relative; z-index: 1; display: grid; width: 72px; height: 72px; place-items: center; border: 1px solid rgba(255,255,255,.27); border-radius: 22px; background: rgba(9, 17, 31, .44); color: white; font-size: 1.9rem; font-weight: 800; box-shadow: 0 15px 40px #060b1599; }
+    .project-image { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .project-card:hover .project-image { transform: scale(1.04); }
+    .project-info { display: flex; flex-direction: column; min-height: 310px; padding: 21px; }
+    .project-title { margin: 0 0 8px; font-size: 1.08rem; letter-spacing: -.02em; }
+    .project-desc { flex: 1; margin: 0 0 15px; color: var(--muted); font-size: .88rem; }
+    .project-highlight { margin: -5px 0 15px; color: #c6d5e8; font-size: .8rem; }
+    .project-highlight strong { color: var(--accent); }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 17px; }
+    .tag { padding: 4px 8px; border-radius: 6px; background: rgba(167, 139, 250, .12); color: #d5c8ff; font-size: .7rem; }
+    .project-links { display: flex; gap: 16px; }
+    .project-links a { color: var(--accent); font-size: .83rem; font-weight: 700; text-decoration: none; }
+    .project-links a:hover { text-decoration: underline; }
+    .experience-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 38px; }
+    .timeline { position: relative; display: grid; gap: 17px; padding-left: 24px; }
+    .timeline::before { position: absolute; top: 13px; bottom: 13px; left: 7px; width: 2px; background: linear-gradient(var(--accent-strong), rgba(129, 140, 248, .15)); content: ""; }
+    .timeline-card, .education-card { padding: 22px 23px; }
+    .timeline-card { position: relative; }
+    .timeline-card::before { position: absolute; top: 27px; left: -24px; width: 12px; height: 12px; border: 3px solid var(--bg); border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px rgba(167, 139, 250, .35); content: ""; }
+    .timeline-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+    .timeline-role { margin: 0; font-size: 1rem; }
+    .timeline-date { flex: 0 0 auto; padding: 4px 9px; border-radius: 999px; background: rgba(131, 168, 255, .1); color: #a9c0ff; font-size: .72rem; }
+    .timeline-meta { margin: 5px 0 10px; color: var(--accent); font-size: .82rem; }
+    .timeline-desc { margin: 0; color: var(--muted); font-size: .86rem; }
+    .education-card + .education-card { margin-top: 14px; }
+    .education-card h3 { margin: 0 0 4px; font-size: 1rem; }
+    .education-card p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .education-card .education-meta { margin-bottom: 11px; color: var(--accent); font-size: .8rem; }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 25px; }
+    .contact-panel { padding: 27px; }
+    .contact-panel h3 { margin: 0 0 10px; font-size: 1.15rem; }
+    .contact-panel > p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .contact-details { display: grid; gap: 13px; margin: 24px 0 0; padding: 0; list-style: none; }
+    .contact-details a { color: #d7e4f5; text-decoration: none; overflow-wrap: anywhere; }
+    .contact-details a:hover { color: var(--accent); }
+    .contact-label { display: block; color: var(--muted); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+    .contact-form { display: grid; gap: 15px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .form-group { display: grid; gap: 6px; }
+    .form-group label { color: #c5d1e3; font-size: .82rem; font-weight: 650; }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 9px; outline: none; background: rgba(8, 14, 26, .55); color: var(--text); transition: border-color .2s, box-shadow .2s; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #687891; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(167, 139, 250, .14); }
+    .form-group textarea { min-height: 132px; resize: vertical; }
+    .form-submit { justify-self: start; border: 0; cursor: pointer; }
+    .form-hint, .form-status { margin: 0; color: var(--muted); font-size: .78rem; }
+    .form-status { color: var(--accent); }
+    .site-footer { padding-block: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .footer-inner p { margin: 0; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--accent); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    @media (max-width: 900px) {
+      .hero { gap: 38px; }
+      .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .experience-grid, .skills-detail { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(var(--max-width), calc(100% - 36px)); }
+      .nav-shell { min-height: 68px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links { position: absolute; top: calc(100% + 1px); left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 18px 14px; border-bottom: 1px solid var(--line); background: rgba(11, 17, 32, .98); }
+      .nav-links.is-open { display: flex; }
+      .nav-links a { display: block; padding: 11px 5px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 45px; padding-block: 60px 72px; text-align: center; }
+      .hero-copy { margin-inline: auto; }
+      .hero-actions, .socials { justify-content: center; }
+      .portrait-column { grid-row: 1; }
+      .hero-image-container { width: min(70%, 275px); }
+      h1 { margin-inline: auto; }
+      .eyebrow { justify-content: center; }
+      .section { padding-block: 68px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 25px; }
+      .section-heading { margin-bottom: 28px; }
+    }
+    @media (max-width: 520px) {
+      h1 { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+      .hero { gap: 34px; padding-block: 44px 56px; }
+      .hero-image-container { width: min(72%, 240px); }
+      .section { padding-block: 56px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-info { min-height: 0; }
+      .form-row, .about-details { grid-template-columns: 1fr; }
+      .timeline-top { display: block; }
+      .timeline-date { display: inline-block; margin-top: 8px; }
+      .contact-panel { padding: 20px; }
+      .social-link, .filter-button { min-height: 44px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-links { gap: 12px; }
+      .portrait-note { right: -15px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="container nav-shell" aria-label="Main navigation">
+      <a class="brand" href="#top">Mark Emmanuel<span>.</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <ul class="nav-links" id="primary-navigation">
+        <li><a href="#top">Home</a></li><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#projects">Portfolio</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
- <!-- Home Section -->
-<section id="home">
-    <div class="hero">
-      <img src="images/profile.jpg" alt="Mark Emmanuel" class="profile-pic">
-      <h1>Hi, I'm <span class="highlight">Mark Emmanuel</span></h1>
-      <p class="tagline">Software Developer | Web Developer | Designer | Creative Thinker</p>
-      <a href="#portfolio" class="btn">View My Work</a>
-    </div>
-  </section>
-
-<!-- About Section -->
-<section id="about">
-    <h2>About Me</h2>
-    <div class="about-content">
-      <div class="about-text">
-        <p class="intro">Hello! I’m <span class="highlight">Mark Emmanuel</span>, 
-          a computer scientist with a passion for innovation and problem-solving.
-           I excel in programming, algorithms, and system design, and have expertise in AI, data analysis
-            and cybersecurity. My commitment to continuous learning and adaptability to the 
-            evolving tech landscape drive my success in developing efficient software solutions.
-             Known for my analytical thinking and collaborative approach, I am dedicated to 
-          tackling new challenges and advancing the field of computer science.</p>
-        <div class="skills">
-          <h3>Skills:</h3>
-          <ul>
-            <li>Python</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>Figma</li>
-            <li>Html</li>
-            <li>Machine Learning</li>
-            <li>And more!</li>
-          </ul>
+  <main id="main" class="container">
+    <header class="hero" id="top">
+      <div class="hero-content">
+        <span class="eyebrow">Hello, I’m Mark Emmanuel Ouma</span>
+        <h1>Building useful things,<br><span class="highlight">with thoughtful code.</span></h1>
+        <p class="hero-title">First Class Honours Computer Science Graduate · Data Analyst · Network Support</p>
+        <p class="hero-copy">I use Python and data analysis to turn information into practical insights, and bring hands-on experience in IT support and network administration. My interests span cloud infrastructure, secure networks, and dependable software.</p>
+        <span class="availability">Open to opportunities and collaborations</span>
+        <div class="hero-actions"><a class="button" href="#projects">View my work <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="#contact">Hire me</a><a class="button button-secondary" href="mark-emmanuel-cv%20(1).pdf" download="mark-emmanuel-cv.pdf">Download CV <span aria-hidden="true">↓</span></a></div>
+        <div class="socials" aria-label="Social profiles">
+          <a class="social-link" href="https://github.com/MarkMannuel" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="social-link" href="https://www.linkedin.com/in/mark-emmanuel-a48b66305" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a class="social-link" href="https://x.com/emmanuelmark089" target="_blank" rel="noopener noreferrer">X ↗</a>
+          <a class="social-link" href="https://instagram.com/mark.emmanuel.587268" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
         </div>
       </div>
-      <img src="images/about.jpg" alt="About Me" class="about-pic">
-    </div>
-  </section>
-
-<!-- Portfolio Section -->
-<section id="portfolio">
-  <h2>Portfolio</h2>
-  <div class="projects">
-    <!-- Fish Recognition System -->
-    <div class="project">
-      <img src="images/fish.png" alt="Fish Recognition System">
-      <div class="project-info">
-        <h3>Fish Recognition System</h3>
-        <p>This is a project developed using machine learning to enable users to recognize the species of fish.</p>
-        <a href="fish-recognition-details.html" class="project-link">View Project</a>
+      <div class="portrait-column">
+        <div class="hero-image-container" role="group" aria-label="Profile photo slideshow">
+          <div class="hero-slider">
+            <div class="slide active" aria-hidden="false"><img src="images/profile-pictures/1.jpg" alt="Profile photo 1 of Mark Emmanuel"></div>
+            <div class="slide" aria-hidden="true"><img src="images/profile-pictures/2.JPG" alt="Profile photo 2 of Mark Emmanuel"></div>
+            <div class="slide" aria-hidden="true"><img src="images/profile-pictures/3.JPG" alt="Profile photo 3 of Mark Emmanuel"></div>
+            <div class="slide" aria-hidden="true"><img src="images/profile-pictures/4.JPG" alt="Profile photo 4 of Mark Emmanuel"></div>
+            <div class="slide" aria-hidden="true"><img src="images/profile-pictures/5.webp" alt="Profile photo 5 of Mark Emmanuel"></div>
+            <div class="slide" aria-hidden="true"><img src="images/profile-pictures/6.jpg" alt="Profile photo 6 of Mark Emmanuel"></div>
+            <div class="slide" aria-hidden="true"><img src="images/profile-pictures/7.jpg" alt="Profile photo 7 of Mark Emmanuel"></div>
+          </div>
+        </div>
+        <p class="hero-caption">Curious by nature. Builder by choice.</p>
       </div>
-    </div>
+    </header>
 
-    <!-- Online Voting System -->
-    <div class="project">
-      <img src="images/home.png" alt="Online Voting System">
-      <div class="project-info">
-        <h3>Online Voting System</h3>
-        <p>This is a system I developed to enable voters to register and vote online.</p>
-        <a href="online-voting-details.html" class="project-link">View Project</a>
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-heading"><span class="section-kicker">A little about me</span><h2 class="section-title" id="about-title">Engineering practical solutions.</h2></div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>I’m Mark Emmanuel Ouma, a First Class Honours Computer Science graduate focused on data analysis, networking, and cloud infrastructure. I use Python, including Pandas, NumPy, and Matplotlib, to analyze data, generate insights, and support decision-making.</p>
+          <p>My experience includes IT support and network administration at Kenya Pipeline Company, with hands-on work in troubleshooting, system optimization, and secure network environments. I’m passionate about combining data-driven solutions with modern networking technologies.</p>
+          <div class="about-stat"><strong>3+</strong><span>core areas: software, data &amp; systems</span></div>
+          <div class="about-actions"><a class="button" href="mark-emmanuel-cv%20(1).pdf" download="mark-emmanuel-cv.pdf">Download CV <span aria-hidden="true">↓</span></a><a class="button button-secondary" href="#contact">Let’s talk</a></div>
+        </div>
+        <div>
+          <ul class="highlight-list">
+            <li><span class="check" aria-hidden="true">✓</span><span>Full-stack web applications, from interface through deployment</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Relational data modelling and practical database solutions</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Networking, IT support, and systems troubleshooting</span></li>
+          </ul>
+          <div class="about-details" aria-label="Personal details">
+            <div class="detail-item"><strong>Name</strong><span>Mark Emmanuel Ouma</span></div>
+            <div class="detail-item"><strong>Email</strong><a href="mailto:emmanuelmark9793@gmail.com">emmanuelmark9793@gmail.com</a></div>
+            <div class="detail-item"><strong>Education</strong><span>BSc Computer Science · First Class Honours</span></div>
+            <div class="detail-item"><strong>Location</strong><span>Kisumu, Kenya</span></div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Farmers Health Management System -->
-    <div class="project">
-      <img src="images/farmer.png" alt="Farmers Health Management System">
-      <div class="project-info">
-        <h3>Farmers Health Management System</h3>
-        <p>This is a project I developed using Flask to enable farmers to have knowledge about their
-           health through an online doctor.</p>
-        <a href="farmers-health-details.html" class="project-link">View Project</a>
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading"><span class="section-kicker">What I work with</span><h2 class="section-title" id="skills-title">Technical skills</h2><p class="section-intro">A practical toolkit across application development, data, infrastructure, and delivery.</p></div>
+      <div class="skills-grid">
+        <article class="skill-card"><span class="skill-icon" aria-hidden="true">&lt;/&gt;</span><h3>Web &amp; Backend</h3><ul><li>Python</li><li>Flask</li><li>JavaScript</li><li>HTML &amp; CSS</li><li>REST APIs</li></ul></article>
+        <article class="skill-card"><span class="skill-icon" aria-hidden="true">▤</span><h3>Data &amp; Cloud</h3><ul><li>PostgreSQL</li><li>SQLite</li><li>Cloudinary</li><li>Render</li></ul></article>
+        <article class="skill-card featured-skill"><span class="skill-icon" aria-hidden="true">▥</span><h3>Data Analyst</h3><ul><li>SQL</li><li>Excel</li><li>Power BI</li><li>Python</li><li>Pandas</li><li>NumPy</li><li>Matplotlib</li><li>Data cleaning</li><li>Exploratory data analysis</li><li>Visualization</li></ul></article>
+        <article class="skill-card"><span class="skill-icon" aria-hidden="true">⌘</span><h3>Networking &amp; OS</h3><ul><li>TCP/IP, DNS &amp; DHCP</li><li>VPN &amp; firewall configuration</li><li>Cisco IOS</li><li>Subnetting</li><li>Linux CLI</li><li>Windows Server</li></ul></article>
+        <article class="skill-card"><span class="skill-icon" aria-hidden="true">⌁</span><h3>Tools &amp; Workflow</h3><ul><li>Git &amp; GitHub</li><li>VS Code</li><li>Diagnostics</li><li>Rufus</li><li>Machine learning</li></ul></article>
       </div>
-    </div>
-  </div>
-</section>
+      <div class="skills-detail">
+        <div class="skills-panel"><h3>Technical skills at a glance</h3>
+          <div class="skill-meter"><div class="skill-meter-label"><span>Python &amp; Flask</span><span>85%</span></div><div class="meter-track" role="meter" aria-label="Python and Flask self-assessment" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85"><div class="meter-fill" style="--level: 85%"></div></div></div>
+          <div class="skill-meter"><div class="skill-meter-label"><span>HTML &amp; CSS</span><span>85%</span></div><div class="meter-track" role="meter" aria-label="HTML and CSS self-assessment" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85"><div class="meter-fill" style="--level: 85%"></div></div></div>
+          <div class="skill-meter"><div class="skill-meter-label"><span>SQL &amp; databases</span><span>80%</span></div><div class="meter-track" role="meter" aria-label="SQL and databases self-assessment" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80"><div class="meter-fill" style="--level: 80%"></div></div></div>
+          <div class="skill-meter"><div class="skill-meter-label"><span>JavaScript</span><span>70%</span></div><div class="meter-track" role="meter" aria-label="JavaScript self-assessment" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"><div class="meter-fill" style="--level: 70%"></div></div></div>
+          <p class="meter-note">Provisional self-assessments—adjust these levels to match your current confidence.</p>
+        </div>
+        <div class="skills-panel"><h3>Professional strengths</h3><div class="professional-skills"><span>Problem solving</span><span>Adaptability</span><span>Communication</span><span>Continuous learning</span><span>Attention to detail</span><span>Collaboration</span></div></div>
+      </div>
+    </section>
 
- <!-- Contact Section -->
-<section id="contact">
-  <h2>Contact Me</h2>
-  <form class="contact-form">
-    <div class="form-group">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" placeholder="Enter your name" required>
-    </div>
-    <div class="form-group">
-      <label for="email">Your Email</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email" required>
-    </div>
-    <div class="form-group">
-      <label for="message">Your Message</label>
-      <textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
-    </div>
-    <button type="submit" class="btn">Send Message</button>
-  </form>
-</section>
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading"><span class="section-kicker">Selected work</span><h2 class="section-title" id="projects-title">Featured projects</h2><p class="section-intro">A selection of software, learning, and data projects. Project previews are illustrative; use the details pages for project descriptions.</p></div>
+      <div class="project-filters" role="group" aria-label="Filter projects">
+        <button class="filter-button" type="button" data-project-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-project-filter="web" aria-pressed="false">Web Development</button><button class="filter-button" type="button" data-project-filter="learning" aria-pressed="false">Learning &amp; Data</button>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card" data-project-category="web"><div class="project-visual visual-vote" role="img" aria-label="Online voting platform preview"><img class="project-image" src="images/home.png" alt="" loading="lazy"></div><div class="project-info"><h3 class="project-title">Online Voting Platform</h3><p class="project-desc">A digital voting system featuring voter authentication, ballot tracking, protected submissions, and vote aggregation.</p><p class="project-highlight"><strong>Technical highlight:</strong> Ballot workflow from voter selection through vote aggregation.</p><div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">SQL</span><span class="tag">HTML &amp; CSS</span></div><div class="project-links"><a href="online-voting-details.html">View project details ↗</a></div></div></article>
+        <article class="project-card" data-project-category="learning"><div class="project-visual visual-fish" role="img" aria-label="Fish recognition system preview"><img class="project-image" src="images/fish.png" alt="" loading="lazy"></div><div class="project-info"><h3 class="project-title">Fish Recognition System</h3><p class="project-desc">An image-recognition project exploring machine-learning techniques for identifying fish species from images.</p><p class="project-highlight"><strong>Focus:</strong> Image classification and species identification.</p><div class="tags"><span class="tag">Python</span><span class="tag">Machine learning</span><span class="tag">Image recognition</span></div><div class="project-links"><a href="fish-recognition-details.html">View project details ↗</a></div></div></article>
+        <article class="project-card" data-project-category="web"><div class="project-visual visual-farmer" role="img" aria-label="Farmers health management system preview"><img class="project-image" src="images/farmer.png" alt="" loading="lazy"></div><div class="project-info"><h3 class="project-title">Farmers Health Management System</h3><p class="project-desc">A Flask-based telemedicine concept to connect farmers with health information and consultation services.</p><p class="project-highlight"><strong>Focus:</strong> Accessible health resources and remote consultations.</p><div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQLAlchemy</span><span class="tag">WebRTC</span></div><div class="project-links"><a href="farmers-health-details.html">View project details ↗</a></div></div></article>
+      </div>
+    </section>
 
-<!-- Footer -->
-<footer>
-  <div class="social-media">
-    <a href="https://linkedin.com/in/mark-emmanuel-a48b66305" target="_blank" class="social-link">
-      <img src="images/linkedin-icon.png" alt="LinkedIn">
-    </a>
-    <a href="https://github.com/mark emmanuel" target="_blank" class="social-link">
-      <img src="images/github-icon.png" alt="GitHub">
-    </a>
-    <a href="https://twitter.com/yourhandle" target="_blank" class="social-link">
-      <img src="images/twitter-icon.png" alt="Twitter">
-    </a>
-    <a href="mailto:emmanuelmark9793@gmail.com" class="social-link">
-      <img src="images/email-icon.png" alt="Email">
-    </a>
-  </div>
-  <p>&copy; 2025 Mark Emmanuel. All rights reserved.</p>
-</footer>
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading"><span class="section-kicker">The path so far</span><h2 class="section-title" id="experience-title">Experience &amp; education</h2></div>
+      <div class="experience-grid">
+        <div class="timeline" aria-label="Work and education journey">
+          <article class="timeline-card"><div class="timeline-top"><h3 class="timeline-role">Freelance Systems Developer</h3><span class="timeline-date">2025 — Present</span></div><p class="timeline-meta">Self-employed</p><p class="timeline-desc">Designing and deploying custom full-stack web applications and relational database solutions for client and business needs.</p></article>
+          <article class="timeline-card"><div class="timeline-top"><h3 class="timeline-role">IT Technical Support &amp; Data Reporting</h3><span class="timeline-date">2025</span></div><p class="timeline-meta">Kenya Pipeline Company · Attachment</p><p class="timeline-desc">Supported operational data logging for vessel and truck loading, desktop support, IP phone configuration, and printer network routing.</p></article>
+          <article class="timeline-card"><div class="timeline-top"><h3 class="timeline-role">Volunteer</h3><span class="timeline-date">August 2025 — Present</span></div><p class="timeline-meta">Kenya Pipeline Company</p><p class="timeline-desc">Continued contributing at Kenya Pipeline Company as a volunteer after completing my attachment.</p></article>
+          <article class="timeline-card"><div class="timeline-top"><h3 class="timeline-role">Bachelor of Science in Computer Science</h3><span class="timeline-date">Graduated 2025</span></div><p class="timeline-meta">Laikipia University</p><p class="timeline-desc">Coursework included software engineering, relational database design, network infrastructure, data structures, and operating systems.</p></article>
+        </div>
+        <div><article class="education-card"><h3>Focus Areas &amp; Self-Study</h3><p class="education-meta">Ongoing learning</p><ul class="highlight-list"><li><span class="check" aria-hidden="true">↗</span><span>Data science and machine learning roadmaps</span></li><li><span class="check" aria-hidden="true">↗</span><span>Cisco networking concepts</span></li><li><span class="check" aria-hidden="true">↗</span><span>Software development and database management</span></li></ul></article></div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="section-heading"><span class="section-kicker">Let’s connect</span><h2 class="section-title" id="contact-title">Have a project in mind?</h2><p class="section-intro">Interested in collaborating or discussing an opportunity? Send a note and let’s start a conversation.</p></div>
+      <div class="contact-grid">
+        <aside class="contact-panel"><h3>Contact details</h3><p>You can reach me directly or use the message form. The form opens a pre-filled email in your email app—no third-party service required.</p><ul class="contact-details"><li><span class="contact-label">Email</span><a href="mailto:emmanuelmark9793@gmail.com">emmanuelmark9793@gmail.com</a></li><li><span class="contact-label">Phone</span><a href="tel:+254745492808">+254 745 492 808</a></li><li><span class="contact-label">Location</span><span>Kisumu, Kenya</span></li></ul></aside>
+        <div class="contact-panel"><form class="contact-form" id="contact-form">
+          <div class="form-row"><div class="form-group"><label for="name">Your name</label><input type="text" id="name" name="name" placeholder="Mark Ouma" autocomplete="name" required></div><div class="form-group"><label for="email">Your email</label><input type="email" id="email" name="email" placeholder="mark@example.com" autocomplete="email" required></div></div>
+          <div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" placeholder="What would you like to discuss?" required></div>
+          <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell me a little about what you have in mind…" required></textarea></div>
+          <button class="button form-submit" type="submit">Open email app <span aria-hidden="true">↗</span></button><p class="form-hint">Your email app will open with your message ready to send.</p><p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span id="year"></span> Mark Emmanuel. Designed &amp; built with care.</p><nav class="footer-links" aria-label="Footer navigation"><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a><a href="#top">Back to top ↑</a></nav></div></footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('#primary-navigation');
+    const slides = document.querySelectorAll('.hero-slider .slide');
+    if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let currentSlide = 0;
+      window.setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        slides[currentSlide].setAttribute('aria-hidden', 'true');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+        slides[currentSlide].setAttribute('aria-hidden', 'false');
+      }, 3500);
+    }
+
+    const closeNavigation = () => {
+      navigation.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open navigation');
+    };
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
+      navigation.classList.toggle('is-open', !isOpen);
+    });
+    navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNavigation));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeNavigation(); });
+
+    const progressBar = document.querySelector('.scroll-progress');
+    const updateScrollProgress = () => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = `${scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0}%`;
+    };
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('resize', updateScrollProgress);
+    updateScrollProgress();
+
+    const revealTargets = document.querySelectorAll('.section-heading, .about-grid, .skill-card, .project-card, .timeline-card, .education-card, .contact-panel');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealTargets.forEach((target) => { target.classList.add('reveal'); revealObserver.observe(target); });
+    }
+
+    const sectionLinks = document.querySelectorAll('.nav-links a');
+    if ('IntersectionObserver' in window) {
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          sectionLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-35% 0px -55% 0px' });
+      document.querySelectorAll('main section[id]').forEach((section) => sectionObserver.observe(section));
+    }
+
+    const projectFilters = document.querySelectorAll('[data-project-filter]');
+    const projectCards = document.querySelectorAll('[data-project-category]');
+    projectFilters.forEach((filter) => {
+      filter.addEventListener('click', () => {
+        const category = filter.dataset.projectFilter;
+        projectFilters.forEach((button) => button.setAttribute('aria-pressed', String(button === filter)));
+        projectCards.forEach((card) => { card.hidden = category !== 'all' && card.dataset.projectCategory !== category; });
+      });
+    });
+
+    document.querySelector('#contact-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+      const formData = new FormData(form);
+      const subject = `${formData.get('subject')} — from ${formData.get('name')}`;
+      const body = `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\n\n${formData.get('message')}`;
+      document.querySelector('#form-status').textContent = 'Opening your email app with the message details…';
+      window.location.href = `mailto:emmanuelmark9793@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+    document.querySelector('#year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
